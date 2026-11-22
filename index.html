@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nathan Vinicius França · Dados, Automação & IA</title>
+<meta name="description" content="Nathan Vinicius França: desenvolvedor full stack e analista de dados. Automação, IA aplicada, Power BI, Python e TypeScript para e-commerce e negócios.">
+<meta property="og:title" content="Nathan Vinicius França · Dados, Automação & IA">
+<meta property="og:description" content="Transformando dados em decisões e processos manuais em sistemas inteligentes.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#07090f">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%2307090f'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='monospace' font-weight='700' font-size='30' fill='%2338e8c6'>NV</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07090f; --bg2:#0c1019; --card:#0f1420; --card2:#131a29; --line:#1d2536;
+  --fg:#e6ebf5; --muted:#8b96ab; --dim:#5c6780;
+  --acc:#38e8c6; --acc2:#7c6cff; --acc3:#ff6ba6;
+  --glow:0 0 0 1px rgba(56,232,198,.25),0 10px 40px -10px rgba(56,232,198,.35);
+  --mono:'JetBrains Mono',ui-monospace,monospace; --sans:'Inter',system-ui,sans-serif;
+  --r:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--acc);color:#04120f}
+#bg{position:fixed;inset:0;z-index:-2;pointer-events:none}
+.grid-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:56px 56px;mask-image:radial-gradient(ellipse at 50% 0%,#000 30%,transparent 75%)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:.3s}
+nav.scrolled{background:rgba(7,9,15,.75);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font-family:var(--mono);font-weight:700;font-size:1.05rem;letter-spacing:-.02em}
+.logo b{color:var(--acc)}
+.links{display:flex;gap:28px;font-size:.9rem;color:var(--muted)}
+.links a{position:relative;transition:color .2s}
+.links a:hover{color:var(--fg)}
+.links a::after{content:"";position:absolute;left:0;bottom:-6px;height:2px;width:0;background:var(--acc);transition:width .25s}
+.links a:hover::after{width:100%}
+.nav-cta{font-size:.85rem;font-weight:600;padding:9px 16px;border-radius:10px;border:1px solid var(--line);background:var(--card);transition:.2s}
+.nav-cta:hover{border-color:var(--acc);box-shadow:var(--glow)}
+.burger{display:none;background:none;border:0;color:var(--fg);font-size:1.5rem;cursor:pointer}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:120px 0 80px;position:relative}
+.hero .wrap{display:grid;grid-template-columns:1.25fr .9fr;gap:56px;align-items:center}
+.badge{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.78rem;color:var(--acc);
+  border:1px solid rgba(56,232,198,.3);background:rgba(56,232,198,.06);padding:7px 14px;border-radius:99px;margin-bottom:26px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--acc);box-shadow:0 0 12px var(--acc);animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.35}}
+h1{font-size:clamp(2.6rem,6vw,4.4rem);line-height:1.04;letter-spacing:-.045em;font-weight:800}
+.grad{background:linear-gradient(100deg,var(--acc) 0%,var(--acc2) 55%,var(--acc3) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.role{font-family:var(--mono);font-size:clamp(1rem,2vw,1.2rem);color:var(--muted);margin:22px 0 18px;min-height:1.8em}
+.role .typed{color:var(--fg)}
+.caret{display:inline-block;width:10px;height:1.15em;background:var(--acc);vertical-align:-3px;margin-left:3px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.lead{font-size:1.1rem;color:var(--muted);max-width:560px}
+.lead strong{color:var(--fg);font-weight:600}
+.ctas{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:.95rem;padding:14px 22px;border-radius:12px;transition:.25s;cursor:pointer;border:1px solid transparent}
+.btn-p{background:var(--acc);color:#04120f}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 12px 40px -8px rgba(56,232,198,.6)}
+.btn-g{border-color:var(--line);background:rgba(255,255,255,.02)}
+.btn-g:hover{border-color:var(--acc2);transform:translateY(-2px)}
+.btn svg{width:18px;height:18px}
+.socials{display:flex;gap:12px;margin-top:30px}
+.socials a{width:42px;height:42px;display:grid;place-items:center;border-radius:12px;border:1px solid var(--line);color:var(--muted);transition:.2s}
+.socials a:hover{color:var(--acc);border-color:var(--acc);transform:translateY(-3px)}
+.socials svg{width:19px;height:19px}
+
+/* terminal */
+.term{background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:18px;overflow:hidden;
+  box-shadow:0 40px 80px -30px rgba(0,0,0,.8),0 0 0 1px rgba(124,108,255,.08);transform:perspective(1200px) rotateY(-6deg) rotateX(3deg);transition:transform .6s}
+.term:hover{transform:perspective(1200px) rotateY(0) rotateX(0)}
+.term-h{display:flex;align-items:center;gap:8px;padding:13px 16px;border-bottom:1px solid var(--line);background:rgba(0,0,0,.2)}
+.term-h i{width:11px;height:11px;border-radius:50%;display:block}
+.term-h span{margin-left:auto;font-family:var(--mono);font-size:.72rem;color:var(--dim)}
+.term pre{font-family:var(--mono);font-size:.82rem;line-height:1.75;padding:20px 22px;color:var(--muted);white-space:pre;overflow-x:auto;min-height:330px}
+.k{color:var(--acc2)}.s{color:var(--acc)}.c{color:var(--dim)}.n{color:#ffb86b}.p{color:var(--acc3)}
+
+/* SECTIONS */
+section{padding:110px 0;position:relative}
+.eyebrow{font-family:var(--mono);font-size:.8rem;color:var(--acc);letter-spacing:.08em;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:28px;height:1px;background:var(--acc)}
+h2{font-size:clamp(2rem,4vw,2.9rem);letter-spacing:-.035em;line-height:1.1;font-weight:800;margin-bottom:18px}
+.sub{color:var(--muted);max-width:620px;font-size:1.05rem}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:-30px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:26px 22px;position:relative;overflow:hidden}
+.stat::before{content:"";position:absolute;inset:0 0 auto 0;height:2px;background:linear-gradient(90deg,var(--acc),var(--acc2))}
+.stat b{display:block;font-size:2.4rem;font-weight:800;letter-spacing:-.04em;line-height:1}
+.stat>span{display:block;color:var(--muted);font-size:.88rem;margin-top:10px}
+
+/* about */
+.about{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:start}
+.about p{color:var(--muted);margin-bottom:16px;font-size:1.04rem}
+.about p strong{color:var(--fg)}
+.pill-list{display:flex;flex-direction:column;gap:14px}
+.pill{display:flex;gap:16px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;transition:.25s}
+.pill:hover{border-color:rgba(56,232,198,.4);transform:translateX(4px)}
+.pill .ic{flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-size:1.3rem;background:linear-gradient(135deg,rgba(56,232,198,.15),rgba(124,108,255,.15))}
+.pill h4{font-size:1rem;margin-bottom:3px}
+.pill p{margin:0;font-size:.9rem}
+
+/* stack */
+.stack{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:46px}
+.sk{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:24px}
+.sk h4{font-family:var(--mono);font-size:.8rem;color:var(--acc);letter-spacing:.06em;margin-bottom:14px;text-transform:uppercase}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{font-size:.8rem;padding:5px 11px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--fg);transition:.2s}
+.tag:hover{border-color:var(--acc2);color:#fff}
+
+/* projects */
+.tabs{display:flex;gap:8px;margin:40px 0 28px;flex-wrap:wrap}
+.tab{font-family:var(--mono);font-size:.85rem;padding:10px 18px;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;transition:.2s}
+.tab.on,.tab:hover{color:var(--fg);border-color:var(--acc);background:rgba(56,232,198,.07)}
+.projects{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.proj{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:30px;display:flex;flex-direction:column;position:relative;overflow:hidden;transition:.3s}
+.proj::after{content:"";position:absolute;inset:-1px;border-radius:20px;padding:1px;background:linear-gradient(135deg,var(--acc),transparent 40%,transparent 60%,var(--acc2));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:.3s;pointer-events:none}
+.proj:hover{transform:translateY(-6px);box-shadow:0 30px 60px -30px rgba(0,0,0,.9)}
+.proj:hover::after{opacity:1}
+.proj.hide{display:none}
+.ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.pic{font-size:1.9rem;width:56px;height:56px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(56,232,198,.14),rgba(124,108,255,.18))}
+.plabel{font-family:var(--mono);font-size:.7rem;padding:5px 10px;border-radius:99px;border:1px solid var(--line);color:var(--muted)}
+.plabel.priv{color:var(--acc3);border-color:rgba(255,107,166,.35)}
+.plabel.pub{color:var(--acc);border-color:rgba(56,232,198,.35)}
+.proj h3{font-size:1.3rem;letter-spacing:-.02em;margin-bottom:10px}
+.proj p{color:var(--muted);font-size:.95rem;margin-bottom:16px}
+.proj ul{list-style:none;margin-bottom:20px;display:flex;flex-direction:column;gap:7px}
+.proj li{font-size:.88rem;color:var(--muted);padding-left:20px;position:relative}
+.proj li::before{content:"▹";position:absolute;left:0;color:var(--acc)}
+.proj .tags{margin-top:auto;margin-bottom:20px}
+.plinks{display:flex;gap:18px;font-size:.88rem;font-weight:600}
+.plinks a{color:var(--acc);display:inline-flex;align-items:center;gap:6px}
+.plinks a:hover{text-decoration:underline}
+.plinks .note{color:var(--dim);font-weight:500;font-size:.84rem}
+
+/* timeline */
+.tl{margin-top:46px;position:relative;padding-left:34px}
+.tl::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--acc),var(--acc2),transparent)}
+.ti{position:relative;margin-bottom:34px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:26px 28px}
+.ti::before{content:"";position:absolute;left:-34px;top:30px;width:16px;height:16px;border-radius:50%;background:var(--bg);border:3px solid var(--acc);box-shadow:0 0 14px var(--acc)}
+.ti-h{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:6px}
+.ti h3{font-size:1.15rem}
+.ti .when{font-family:var(--mono);font-size:.8rem;color:var(--acc)}
+.ti .org{color:var(--acc2);font-weight:600;font-size:.92rem;margin-bottom:12px}
+.ti ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.ti li{color:var(--muted);font-size:.93rem;padding-left:20px;position:relative}
+.ti li::before{content:"▹";position:absolute;left:0;color:var(--acc)}
+
+/* certs */
+.certs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:46px}
+.cert{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:flex;gap:16px;transition:.25s}
+.cert:hover{border-color:rgba(124,108,255,.5);transform:translateY(-4px)}
+.cert .ci{flex:none;width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-size:1.3rem;background:rgba(124,108,255,.12)}
+.cert h4{font-size:.96rem;line-height:1.35;margin-bottom:4px}
+.cert .who{font-size:.8rem;color:var(--acc);font-family:var(--mono)}
+.cert .d{font-size:.84rem;color:var(--muted);margin-top:6px}
+.edu{grid-column:span 2;display:flex;align-items:center;gap:18px;background:linear-gradient(120deg,rgba(56,232,198,.08),rgba(124,108,255,.08));border:1px solid var(--line);border-radius:var(--r);padding:22px 26px}
+.edu .ci{font-size:1.6rem}
+.edu h4{font-size:1.05rem}
+.edu p{color:var(--muted);font-size:.9rem}
+
+/* contact */
+.contact{text-align:center;background:radial-gradient(ellipse at 50% 100%,rgba(124,108,255,.18),transparent 60%),var(--card);border:1px solid var(--line);border-radius:28px;padding:80px 30px}
+.contact h2{font-size:clamp(2.2rem,5vw,3.4rem)}
+.contact .sub{margin:0 auto 34px}
+.contact .ctas{justify-content:center}
+footer{padding:40px 0;text-align:center;color:var(--dim);font-size:.85rem;font-family:var(--mono)}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.caret,.dot{animation:none}html{scroll-behavior:auto}}
+
+/* responsive */
+@media (max-width:960px){
+  .hero .wrap,.about{grid-template-columns:1fr}
+  .term{transform:none}
+  .stats{grid-template-columns:repeat(2,1fr);margin-top:0}
+  .stack{grid-template-columns:repeat(2,1fr)}
+  .certs{grid-template-columns:repeat(2,1fr)}
+  .edu{grid-column:span 2}
+}
+@media (max-width:720px){
+  .links,.nav-cta{display:none}
+  .burger{display:block}
+  .links.open{display:flex;position:absolute;top:68px;left:0;right:0;flex-direction:column;gap:0;background:rgba(7,9,15,.97);border-bottom:1px solid var(--line);padding:8px 24px 18px}
+  .links.open a{padding:12px 0;font-size:1rem}
+  .projects,.stack,.certs{grid-template-columns:1fr}
+  .edu{grid-column:auto}
+  section{padding:80px 0}
+  .term pre{min-height:0;font-size:.76rem}
+}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<div class="grid-bg"></div>
+
+<nav id="nav">
+  <div class="wrap">
+    <a href="#top" class="logo">&lt;nathan<b>.dev</b>/&gt;</a>
+    <div class="links" id="links">
+      <a href="#sobre">Sobre</a>
+      <a href="#stack">Stack</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#experiencia">Experiência</a>
+      <a href="#certificacoes">Certificações</a>
+    </div>
+    <a href="#contato" class="nav-cta">Vamos conversar →</a>
+    <button class="burger" id="burger" aria-label="Abrir menu">☰</button>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <div class="badge rv"><span class="dot"></span> Disponível para novos projetos</div>
+      <h1 class="rv">Nathan Vinicius<br><span class="grad">França</span></h1>
+      <div class="role rv">&gt; <span class="typed" id="typed"></span><span class="caret"></span></div>
+      <p class="lead rv">Transformo <strong>dados em decisões</strong> e <strong>processos manuais em sistemas inteligentes</strong>. Construo plataformas com IA, automações e dashboards que devolvem horas para as equipes e colocam a estratégia em primeiro lugar.</p>
+      <div class="ctas rv">
+        <a href="#projetos" class="btn btn-p">Ver projetos
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        <a href="#contato" class="btn btn-g">Entrar em contato</a>
+      </div>
+      <div class="socials rv">
+        <a href="https://github.com/NathanFranc" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.6 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg></a>
+        <a href="https://www.linkedin.com/in/nathan-fran%C3%A7a-050120313/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.4 20.5h-3.6v-5.6c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.7H9.3V9h3.4v1.6h.1c.5-.9 1.6-1.8 3.4-1.8 3.6 0 4.3 2.4 4.3 5.5v6.2zM5.3 7.4a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2zM7.1 20.5H3.5V9h3.6v11.5zM22.2 0H1.8C.8 0 0 .8 0 1.7v20.6c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V1.7C24 .8 23.2 0 22.2 0z"/></svg></a>
+        <a href="mailto:limavinicius195@gmail.com" aria-label="E-mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m3 6 9 7 9-7"/></svg></a>
+      </div>
+    </div>
+    <div class="term rv" aria-hidden="true">
+      <div class="term-h"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span>~/nathan/perfil.py</span></div>
+      <pre id="code"></pre>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="stats">
+    <div class="stat rv"><b><span class="count" data-to="70">0</span>%</b><span>menos tempo operacional com automações e agentes de IA</span></div>
+    <div class="stat rv"><b><span class="count" data-to="50">0</span>+</b><span>usuários usando dashboards executivos que eu construí</span></div>
+    <div class="stat rv"><b><span class="count" data-to="15">0</span>+</b><span>processos de negócio mapeados, com KPIs e OKRs</span></div>
+    <div class="stat rv"><b><span class="count" data-to="10">0</span></b><span>certificações em dados, IA, Databricks e DevOps</span></div>
+  </div>
+</div>
+
+<section id="sobre">
+  <div class="wrap about">
+    <div>
+      <div class="eyebrow rv">01 · SOBRE MIM</div>
+      <h2 class="rv">Dados, automação e IA<br>que <span class="grad">geram resultado</span>.</h2>
+      <p class="rv">Sou analista de dados com um pé na engenharia e outro na inteligência artificial. Comecei traduzindo desafios de negócio em <strong>SQL e dashboards de Power BI</strong>. Hoje construo, como desenvolvedor principal, <strong>plataformas completas</strong> que automatizam a operação de lojas em marketplaces.</p>
+      <p class="rv">Depois de entregar um relatório, sempre me pergunto: <strong>"como dá pra automatizar e escalar isso?"</strong>. É aí que entram Python, TypeScript, n8n e agentes de IA com RAG, que leem documentos, coletam dados da web e respondem clientes.</p>
+      <p class="rv">Para mim, um projeto de sucesso não é só o que entrega um dashboard. É o que devolve horas preciosas para a equipe.</p>
+    </div>
+    <div class="pill-list">
+      <div class="pill rv"><div class="ic">🤖</div><div><h4>IA aplicada</h4><p>Agentes de atendimento, RAG, servidores MCP e a API do Claude em produção.</p></div></div>
+      <div class="pill rv"><div class="ic">⚙️</div><div><h4>Automação de ponta a ponta</h4><p>Integrações com APIs, webhooks, robôs de navegador e fluxos em n8n.</p></div></div>
+      <div class="pill rv"><div class="ic">📊</div><div><h4>Dados & BI</h4><p>Modelagem estrela, arquitetura medalhão, ETL, DAX e dashboards executivos.</p></div></div>
+      <div class="pill rv"><div class="ic">🚀</div><div><h4>Full stack com qualidade</h4><p>FastAPI, Next.js, testes automatizados, Docker e deploy em VPS.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="stack" style="padding-top:40px">
+  <div class="wrap">
+    <div class="eyebrow rv">02 · STACK</div>
+    <h2 class="rv">Ferramentas do dia a dia</h2>
+    <p class="sub rv">Do banco de dados à interface, passando pela IA e pela infraestrutura.</p>
+    <div class="stack">
+      <div class="sk rv"><h4>Back-end</h4><div class="tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">SQLModel</span><span class="tag">SQLAlchemy</span><span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">APScheduler</span></div></div>
+      <div class="sk rv"><h4>Front-end</h4><div class="tags"><span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">Next.js</span><span class="tag">Tailwind</span><span class="tag">PWA</span><span class="tag">Figma</span><span class="tag">Streamlit</span></div></div>
+      <div class="sk rv"><h4>Dados & BI</h4><div class="tags"><span class="tag">SQL</span><span class="tag">PostgreSQL</span><span class="tag">SQL Server</span><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Databricks</span><span class="tag">Pandas</span><span class="tag">Dask</span><span class="tag">ETL</span></div></div>
+      <div class="sk rv"><h4>IA, automação & infra</h4><div class="tags"><span class="tag">Claude API</span><span class="tag">MCP</span><span class="tag">RAG</span><span class="tag">Ollama</span><span class="tag">n8n</span><span class="tag">Playwright</span><span class="tag">Docker</span><span class="tag">Kubernetes</span><span class="tag">Terraform</span><span class="tag">GitHub Actions</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="projetos">
+  <div class="wrap">
+    <div class="eyebrow rv">03 · PROJETOS</div>
+    <h2 class="rv">O que eu construí</h2>
+    <p class="sub rv">Sistemas em produção na empresa onde trabalho, com código privado, e projetos abertos no meu GitHub.</p>
+    <div class="tabs rv">
+      <button class="tab on" data-f="all">Todos</button>
+      <button class="tab" data-f="pro">Profissionais</button>
+      <button class="tab" data-f="open">Open source</button>
+    </div>
+    <div class="projects">
+      <article class="proj rv" data-k="pro">
+        <div class="ph"><div class="pic">🧠</div><span class="plabel priv">● Em produção · privado</span></div>
+        <h3>Plataforma de gestão e automação para Mercado Livre</h3>
+        <p>Painel que centraliza a operação de várias contas de vendedor. Sou o desenvolvedor principal, da integração inicial até a produção.</p>
+        <ul>
+          <li>Atendimento com IA para perguntas, pós-venda e reclamações</li>
+          <li>Monitoramento de Buy Box, concorrentes, campanhas e Mercado Ads</li>
+          <li>OAuth2 com PKCE, webhooks em tempo real e servidor MCP próprio</li>
+          <li>~290 módulos Python e mais de 140 arquivos de teste</li>
+        </ul>
+        <div class="tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Claude API</span><span class="tag">MCP</span><span class="tag">Docker</span></div>
+        <div class="plinks"><span class="note">Código privado · detalhes numa conversa</span></div>
+      </article>
+      <article class="proj rv" data-k="pro">
+        <div class="ph"><div class="pic">📦</div><span class="plabel priv">● Em produção · privado</span></div>
+        <h3>Gestão de devoluções multimarketplace</h3>
+        <p>App <em>mobile-first</em> para receber, conferir e dar destino às devoluções de seis marketplaces.</p>
+        <ul>
+          <li>Leitor de código de barras pela câmera e conferência por unidade</li>
+          <li>Funciona sem internet: as mídias sobem quando a conexão volta</li>
+          <li>Módulo fiscal com NF-e, DANFE e XML</li>
+          <li>Mais de 200 arquivos de teste, com Vitest e Playwright</li>
+        </ul>
+        <div class="tags"><span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">PostgreSQL</span><span class="tag">PWA</span></div>
+        <div class="plinks"><span class="note">Código privado · detalhes numa conversa</span></div>
+      </article>
+      <article class="proj rv" data-k="open">
+        <div class="ph"><div class="pic">💬</div><span class="plabel pub">● Open source</span></div>
+        <h3>Hub Comercial Inteligente</h3>
+        <p>MVP com 4 módulos integrados para o comercial de uma loja de varejo.</p>
+        <ul>
+          <li>Chatbot com RAG real (Ollama + ChromaDB) e escalada para humano</li>
+          <li>Inteligência de preços com dados do Mercado Livre</li>
+          <li>OCR de notas fiscais e cadastros multi-CNPJ com RBAC</li>
+        </ul>
+        <div class="tags"><span class="tag">React</span><span class="tag">FastAPI</span><span class="tag">Ollama</span><span class="tag">MinIO</span><span class="tag">Docker</span></div>
+        <div class="plinks"><a href="https://github.com/NathanFranc/hub-comercial-inteligente" target="_blank" rel="noopener">Ver código ↗</a></div>
+      </article>
+      <article class="proj rv" data-k="open">
+        <div class="ph"><div class="pic">🧹</div><span class="plabel pub">● Open source</span></div>
+        <h3>DataSieve AI</h3>
+        <p>Recebe uma planilha bruta e entrega o modelo pronto para o Power BI.</p>
+        <ul>
+          <li>Limpeza inteligente, com Pandas ou Dask conforme o tamanho</li>
+          <li>Detecta o modelo estrela e separa a fato e as dimensões</li>
+          <li>Gera script DAX, diagrama Mermaid e relatório em PDF</li>
+        </ul>
+        <div class="tags"><span class="tag">Pandas</span><span class="tag">Dask</span><span class="tag">FastAPI</span><span class="tag">React</span></div>
+        <div class="plinks"><a href="https://github.com/NathanFranc/datasieve-ai" target="_blank" rel="noopener">Ver código ↗</a></div>
+      </article>
+      <article class="proj rv" data-k="open">
+        <div class="ph"><div class="pic">🔍</div><span class="plabel pub">● Open source</span></div>
+        <h3>Detector de IA</h3>
+        <p>PWA de análise forense que estima se uma imagem ou um texto foi gerado por IA, 100% no navegador.</p>
+        <ul>
+          <li>ELA, FFT, ruído e metadados EXIF/C2PA</li>
+          <li>Análise de texto por estrutura, vocabulário e <em>burstiness</em></li>
+          <li>Processamento em massa e teste de robustez</li>
+        </ul>
+        <div class="tags"><span class="tag">JavaScript</span><span class="tag">Canvas</span><span class="tag">PWA</span><span class="tag">Nginx</span></div>
+        <div class="plinks"><a href="https://github.com/NathanFranc/detector-ia" target="_blank" rel="noopener">Ver código ↗</a></div>
+      </article>
+      <article class="proj rv" data-k="pro">
+        <div class="ph"><div class="pic">🎨</div><span class="plabel priv">● Em produção · privado</span></div>
+        <h3>Estúdio de criação de artes com IA</h3>
+        <p>Gera as artes e as legendas do Instagram a partir da foto e da ficha técnica do produto.</p>
+        <ul>
+          <li>Modelos por marca, com cores, logos e formatos próprios</li>
+          <li>Publicação direta no Instagram</li>
+          <li>Histórico reutilizável e painel de administração</li>
+        </ul>
+        <div class="tags"><span class="tag">Node.js</span><span class="tag">TypeScript</span><span class="tag">Claude API</span><span class="tag">Sharp</span></div>
+        <div class="plinks"><span class="note">Código privado · detalhes numa conversa</span></div>
+      </article>
+    </div>
+    <p class="rv" style="text-align:center;margin-top:36px"><a class="btn btn-g" href="https://github.com/NathanFranc?tab=repositories" target="_blank" rel="noopener">Ver todos os repositórios no GitHub ↗</a></p>
+  </div>
+</section>
+
+<section id="experiencia">
+  <div class="wrap">
+    <div class="eyebrow rv">04 · EXPERIÊNCIA</div>
+    <h2 class="rv">Trajetória</h2>
+    <div class="tl">
+      <div class="ti rv">
+        <div class="ti-h"><h3>Desenvolvedor full stack · Automação & IA</h3><span class="when">ATUAL</span></div>
+        <div class="org">Operação de e-commerce em marketplaces</div>
+        <ul>
+          <li>Desenvolvedor principal de uma plataforma de gestão e automação para várias contas de vendedor no Mercado Livre</li>
+          <li>Agentes de IA para atendimento e sistemas de logística de devoluções e de criação de artes</li>
+          <li>Integrações com APIs de marketplaces, testes automatizados e deploy com Docker em VPS</li>
+        </ul>
+      </div>
+      <div class="ti rv">
+        <div class="ti-h"><h3>Analista de Dados</h3><span class="when">MAI 2024 — JUN 2025</span></div>
+        <div class="org">Data Mundo · Remoto</div>
+        <ul>
+          <li>Dashboards executivos em Power BI (DAX/M) para mais de 50 usuários, do protótipo no Figma ao treinamento</li>
+          <li>Mapeamento e padronização de mais de 15 processos de negócio, com definição de KPIs e OKRs</li>
+          <li>ETL com SQL (SQL Server, PostgreSQL) e Power Query integrando múltiplas fontes de dados</li>
+          <li>LGPD e gamificação aplicadas para garantir conformidade e aumentar a adoção</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certificacoes" style="padding-top:40px">
+  <div class="wrap">
+    <div class="eyebrow rv">05 · CERTIFICAÇÕES</div>
+    <h2 class="rv">Aprendizado contínuo</h2>
+    <div class="certs">
+      <div class="cert rv"><div class="ci">🧱</div><div><h4>Databricks Fundamentals Accreditation</h4><div class="who">Databricks Academy</div><div class="d">Lakehouse, governança, engenharia e IA</div></div></div>
+      <div class="cert rv"><div class="ci">🥇</div><div><h4>Modelagem e Arquitetura Medalhão</h4><div class="who">Databricks · 2025</div><div class="d">Camadas Bronze, Silver e Gold em Lakehouse</div></div></div>
+      <div class="cert rv"><div class="ci">☁️</div><div><h4>DevOps na Nuvem</h4><div class="who">Workshop · 2025</div><div class="d">Docker, Kubernetes, Terraform, Helm e CI/CD</div></div></div>
+      <div class="cert rv"><div class="ci">🐍</div><div><h4>Bootcamp Intensivo de Python (35h)</h4><div class="who">Jornada de Dados · 2025</div><div class="d">POO, back-end e projeto com 1 bilhão de linhas</div></div></div>
+      <div class="cert rv"><div class="ci">📚</div><div><h4>Agente de IA com RAG</h4><div class="who">Jornada de Dados · 2025</div><div class="d">Leitura inteligente de documentos com n8n</div></div></div>
+      <div class="cert rv"><div class="ci">🕸️</div><div><h4>Agente de Web Scraping</h4><div class="who">Jornada de Dados · 2025</div><div class="d">Coleta e estruturação automatizada com n8n</div></div></div>
+      <div class="cert rv"><div class="ci">💰</div><div><h4>Agente Financeiro com SQL</h4><div class="who">Jornada de Dados · 2025</div><div class="d">n8n integrado com PostgreSQL</div></div></div>
+      <div class="cert rv"><div class="ci">📈</div><div><h4>Agentes de IA para Marketing</h4><div class="who">Jornada de Dados · 2025</div><div class="d">Segmentação e automação de campanhas</div></div></div>
+      <div class="cert rv"><div class="ci">✉️</div><div><h4>Agente de E-mail Inteligente</h4><div class="who">Jornada de Dados · 2025</div><div class="d">Triagem e resposta automática</div></div></div>
+      <div class="cert rv"><div class="ci">🗄️</div><div><h4>Big Data</h4><div class="who">UNIASSELVI · 2025</div><div class="d">Gestão e análise de grandes volumes de dados</div></div></div>
+      <div class="edu rv"><div class="ci">🎓</div><div><h4>Graduação em Banco de Dados</h4><p>UNIASSELVI · formação acadêmica</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="contato">
+  <div class="wrap">
+    <div class="contact rv">
+      <div class="eyebrow" style="justify-content:center">06 · CONTATO</div>
+      <h2>Vamos construir algo <span class="grad">juntos</span>?</h2>
+      <p class="sub">Estou aberto a oportunidades e projetos em dados, automação e IA. Me chama que eu respondo rápido.</p>
+      <div class="ctas">
+        <a class="btn btn-p" href="mailto:limavinicius195@gmail.com">✉️ Enviar e-mail</a>
+        <a class="btn btn-g" href="https://www.linkedin.com/in/nathan-fran%C3%A7a-050120313/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="btn btn-g" href="https://github.com/NathanFranc" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>© <span id="yr"></span> Nathan Vinicius França · feito com código, café e IA ☕</footer>
+
+<script>
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// nav
+const nav = document.getElementById('nav');
+addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 20), {passive:true});
+const links = document.getElementById('links');
+document.getElementById('burger').onclick = () => links.classList.toggle('open');
+links.querySelectorAll('a').forEach(a => a.onclick = () => links.classList.remove('open'));
+
+// typing
+const roles = ['Desenvolvedor Full Stack', 'Automação & IA aplicada', 'Analista de Dados · Power BI', 'Agentes de IA com RAG e MCP'];
+const typed = document.getElementById('typed');
+let ri = 0, ci = 0, del = false;
+function type(){
+  const w = roles[ri];
+  typed.textContent = w.slice(0, ci);
+  if(!del && ci < w.length){ ci++; setTimeout(type, 55); }
+  else if(!del){ del = true; setTimeout(type, 1800); }
+  else if(ci > 0){ ci--; setTimeout(type, 28); }
+  else { del = false; ri = (ri+1) % roles.length; setTimeout(type, 300); }
+}
+reduce ? typed.textContent = roles[0] : type();
+
+// terminal code
+const code = `<span class="k">class</span> <span class="n">Nathan</span>:
+    nome    = <span class="s">"Nathan Vinicius França"</span>
+    papel   = <span class="s">"Full Stack · Dados · IA"</span>
+    stack   = [<span class="s">"Python"</span>, <span class="s">"TypeScript"</span>,
+               <span class="s">"SQL"</span>, <span class="s">"FastAPI"</span>,
+               <span class="s">"Next.js"</span>, <span class="s">"Power BI"</span>]
+    ia      = [<span class="s">"Claude"</span>, <span class="s">"RAG"</span>, <span class="s">"MCP"</span>, <span class="s">"n8n"</span>]
+
+    <span class="k">def</span> <span class="p">resolver</span>(self, problema):
+        dados = self.modelar(problema)
+        insight = self.analisar(dados)
+        <span class="k">return</span> self.automatizar(insight)
+
+<span class="c"># &gt;&gt;&gt; Nathan().resolver("processo manual")</span>
+<span class="s">✔ -70% de tempo operacional</span>`;
+const pre = document.getElementById('code');
+if(reduce){ pre.innerHTML = code; }
+else{
+  let i = 0;
+  (function step(){
+    if(i > code.length) return;
+    if(code[i] === '<'){ i = code.indexOf('>', i) + 1; }
+    else if(code[i] === '&'){ i = code.indexOf(';', i) + 1; }
+    else i++;
+    pre.innerHTML = code.slice(0, i) + '<span class="caret"></span>';
+    setTimeout(step, code[i-1] === '\n' ? 90 : 14);
+  })();
+}
+
+// reveal + counters
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if(!e.isIntersecting) return;
+  e.target.classList.add('in'); io.unobserve(e.target);
+  e.target.querySelectorAll('.count').forEach(c => {
+    const to = +c.dataset.to, t0 = performance.now(), d = 1400;
+    (function f(t){ const p = Math.min((t - t0)/d, 1); c.textContent = Math.round(to * (1 - Math.pow(1-p, 3))); if(p < 1) requestAnimationFrame(f); })(t0);
+  });
+}), {threshold:.12});
+document.querySelectorAll('.rv').forEach((el, i) => { el.style.transitionDelay = (i % 4) * 70 + 'ms'; io.observe(el); });
+
+// filters
+document.querySelectorAll('.tab').forEach(b => b.onclick = () => {
+  document.querySelectorAll('.tab').forEach(x => x.classList.remove('on')); b.classList.add('on');
+  document.querySelectorAll('.proj').forEach(p => p.classList.toggle('hide', b.dataset.f !== 'all' && p.dataset.k !== b.dataset.f));
+});
+
+// background particles
+const cv = document.getElementById('bg'), ctx = cv.getContext('2d');
+let W, H, pts = [];
+function size(){ W = cv.width = innerWidth * devicePixelRatio; H = cv.height = innerHeight * devicePixelRatio; cv.style.width = innerWidth+'px'; cv.style.height = innerHeight+'px';
+  const n = Math.min(70, Math.floor(innerWidth / 18));
+  pts = Array.from({length:n}, () => ({x:Math.random()*W, y:Math.random()*H, vx:(Math.random()-.5)*.25*devicePixelRatio, vy:(Math.random()-.5)*.25*devicePixelRatio}));
+}
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  const md = 140 * devicePixelRatio;
+  for(const p of pts){ p.x += p.vx; p.y += p.vy; if(p.x<0||p.x>W) p.vx*=-1; if(p.y<0||p.y>H) p.vy*=-1;
+    ctx.fillStyle = 'rgba(56,232,198,.5)'; ctx.beginPath(); ctx.arc(p.x, p.y, 1.4*devicePixelRatio, 0, 7); ctx.fill(); }
+  for(let i=0;i<pts.length;i++) for(let j=i+1;j<pts.length;j++){
+    const a = pts[i], b = pts[j], d = Math.hypot(a.x-b.x, a.y-b.y);
+    if(d < md){ ctx.strokeStyle = `rgba(124,108,255,${(1-d/md)*.18})`; ctx.lineWidth = devicePixelRatio; ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke(); }
+  }
+  requestAnimationFrame(draw);
+}
+size(); addEventListener('resize', size);
+if(!reduce) draw();
+</script>
+</body>
+</html>
